@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Account Opening Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <h1>ACCOUNT OPENING FORM</h1>
+    <form name="myForm" novalidate>
+        <fieldset>
+            <legend>Personal Details</legend>
+            <div>
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" ng-model="name" required pattern="[a-zA-Z ]+" />
+                <div ng-show="myForm.name.$dirty && myForm.name.$invalid">
+                    <span ng-show="myForm.name.$error.required">Name is required.</span>
+                    <span ng-show="myForm.name.$error.pattern">Name should contain only alphabets.</span>
+                </div>
+            </div>
+            <div>
+                <label for="father-name">Father's Name </label>
+                <input type="text" id="father-name" name="fatherName" ng-model="fatherName" />
+            </div>
+
+            <div>
+                <label for="dob">Date of Birth *</label>
+                <input type="date" id="dob" name="dob" ng-model="dob" required />
+            </div>
+
+            <div>
+                <label for="gender">Gender *</label>
+                <input type="radio" id="male" name="gender" value="male" ng-model="gender" required />Male
+                <input type="radio" id="female" name="gender" value="female" ng-model="gender" required />Female
+                <div ng-show="myForm.gender.$dirty && myForm.gender.$invalid">
+                    <span ng-show="myForm.gender.$error.required">Gender is required.</span>
+                </div>
+            </div>
+
+            <div>
+                <label for="nationality">Nationality *</label>
+                <select id="nationality" name="nationality" ng-model="nationality" required>
+                    <option value="">-- Select --</option>
+                    <option value="indian">Indian</option>
+                    <option value="american">American</option>
+                    <option value="british">British</option>
+                </select>
+                <div ng-show="myForm.nationality.$dirty && myForm.nationality.$invalid">
+                    <span ng-show="myForm.nationality.$error.required">Nationality is required.</span>
+                </div>
+            </div>
+
+            <div>
+                <label for="account-type">Account Type *</label>
+                <input type="radio" id="savings" name="accountType" value="savings" ng-model="accountType"
+                    required />Savings
+                <input type="radio" id="fixed" name="accountType" value="fixed" ng-model="accountType" required />Fixed
+                <div ng-show="myForm.accountType.$dirty && myForm.accountType.$invalid">
+                    <span ng-show="myForm.accountType.$error.required">Account type is required.</span>
+                </div>
+            </div>
+
+
+            <div>
+                <label>Preferences</label>
+                <input type="checkbox" id="internet-banking" name="preferences" value="internetBanking"
+                    ng-model="preferences.internetBanking" />Internet Banking
+                <input type="checkbox" id="mobile-banking" name="preferences" value="mobileBanking"
+                    ng-model="preferences.mobileBanking" />Mobile Banking
+                <input type="checkbox" id="sms-alerts" name="preferences" value="smsAlerts"
+                    ng-model="preferences.smsAlerts" />SMS Alerts
+
+            </div>
+
+            <div>
+                <label for="address">Address </label>
+                <textarea id="address" name="address" ng-model="address"></textarea>
+
+            </div>
+
+            <div>
+
+                <label for="country">Country *</label>
+                <select id="country" name="country" ng-model="country" required>
+                    <option value="">-- Select --</option>
+                    <option value="indian">India</option>
+                    <option value="american">America</option>
+                    <option value="british">Russia</option>
+                </select>
+                <div ng-show="myForm.country.$dirty && myForm.country.$invalid">
+                    <span ng-show="myForm.country.$error.required">Country is required.</span>
+                </div>
+
+            </div>
+
+            <div>
+                <label for="zipcode">Zipcode *</label>
+                <input type="text" id="zipcode" name="zipcode" ng-model="zipcode" required pattern="[0-9]{6}" />
+                <div ng-show="myForm.zipcode.$dirty && myForm.zipcode.$invalid">
+                    <span ng-show="myForm.zipcode.$error.required">Zipcode is required.</span>
+                    <span ng-show="myForm.zipcode.$error.pattern">Zipcode should be a 6-digit number.</span>
+                </div>
+            </div>
+
+
+            <div>
+                <label for="phone">Phone *</label>
+                <input type="text" id="phone" name="phone" ng-model="phone" required pattern="[0-9]{10}" />
+                <div ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
+                    <span ng-show="myForm.phone.$error.required">Phone is required.</span>
+                    <span ng-show="myForm.phone.$error.pattern">Phone should be a 10-digit number.</span>
+                </div>
+            </div>
+
+
+            <div>
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" ng-model="email" required />
+                <div ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                    <span ng-show="myForm.email.$error.required">Email is required.</span>
+                    <span ng-show="myForm.email.$error.email">Invalid email format.</span>
+                </div>
+            </div>
+
+            <div>
+                <label for="password">Password *</label>
+                <input type="password" id="password" name="password" ng-model="password" required minlength="6"
+                    maxlength="8" />
+                <div ng-show="myForm.password.$dirty && myForm.password.$invalid">
+                    <span ng-show="myForm.password.$error.required">Password is required.</span>
+                    <span ng-show="myForm.password.$error.minlength || myForm.password.$error.maxlength">Password should
+                        be
+                        between 6 to 8 characters.</span>
+                </div>
+            </div>
+            </div>
+            <label for="verify-password">Verify Password *</label>
+            <input type="password" id="verify-password" name="verifyPassword" ng-model="verifyPassword" required />
+            <div ng-show="myForm.verifyPassword.$dirty && myForm.verifyPassword.$invalid">
+                <span ng-show="myForm.verifyPassword.$error.required">Verify password is required.</span>
+                <span ng-show="myForm.password.$valid && myForm.verifyPassword.$invalid">Passwords do not match.</span>
+            </div>
+            <div>
+
+
+        </fieldset>
+             <!--  submit and clear buttons -->
+        <input type="submit" value="Send" ng-disabled="myForm.$invalid" />
+        <input type="button" value="Clear" ng-click="clear()" />
+    </form>
+    </div>
+</body>
+
+</html>
+<!-- AngularJS script -->
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.preferences = {};
+
+        $scope.submitForm = function () {
+            // we are giving a alert here 
+            if ($scope.myForm.$valid) {
+                alert("Form  is submitted successfully!");
+            }
+        };
+
+        $scope.clear = function () {
+            // Clear form fields
+            $scope.name = '';
+            $scope.fatherName = '';
+            $scope.dateOfBirth = '';
+            $scope.gender = '';
+            $scope.nationality = '';
+            $scope.accountType = '';
+            $scope.preferences = {};
+            $scope.address = '';
+            $scope.country = '';
+            $scope.zipcode = '';
+            $scope.phone = '';
+            $scope.email = '';
+            $scope.password = '';
+            $scope.verifyPassword = '';
+            $scope.myForm.$setPristine();
+        };
+    });
+</script>

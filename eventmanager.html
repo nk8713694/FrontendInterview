@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>my event manager</title>
+  </head>
+  <body>
+    <button id="myButton">Click me</button>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        console.log('hello');
+
+        class EventManager {
+          constructor() {
+            this.listeners = {};
+            console.log('hi am in constructor');
+          }
+
+          addEventListener(eventType, callBack) {
+            if (!this.listeners[eventType]) {
+              this.listeners[eventType] = [];
+            }
+            this.listeners[eventType].push(callBack);
+          }
+
+          removeEventListener(eventType, callBack) {
+            if (this.listeners[eventType]) {
+              this.listeners[eventType] = this.listeners[eventType].filter(
+                (listener) => listener !== callBack
+              );
+            }
+          }
+
+          dispatchEvent(eventType, data) {
+            if (this.listeners[eventType]) {
+              this.listeners[eventType].forEach((callback) => {
+                callback(data);
+              });
+            }
+          }
+        }
+
+        const eventmanager = new EventManager();
+
+        eventmanager.addEventListener('click', (data) => {
+          console.log('hello add event listener:', data);
+        });
+
+        document
+          .getElementById('myButton')
+          .addEventListener('click', function () {
+            eventmanager.dispatchEvent('click', 'button clicked');
+          });
+      });
+    </script>
+  </body>
+</html>
