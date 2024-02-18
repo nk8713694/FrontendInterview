@@ -41,3 +41,20 @@ function debounce(callBack, delay, immediate = false) {
     }
   };
 }
+
+function debounce(callBack, delay, immediate = false) {
+  let timerId;
+
+  return function (args) {
+    clearInterval(timerId);
+
+    if (immediate == true && timerId == null) {
+      callBack.apply(this, args);
+    } else {
+      setTimeout(() => {
+        callBack.apply(this, args);
+        timerId = null;
+      }, delay);
+    }
+  };
+}
