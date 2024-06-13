@@ -1,0 +1,109 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+
+    TrieSearch root;
+
+    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+
+        List<List<String>> result = new ArrayList<List<String>>();
+
+        root = callFillTrie(products);
+
+        String prefix="";
+
+        for(char c : searchWord.toCharArray()) {
+
+        List<String> outputforprefix = new ArrayList<String>();
+            prefix = prefix + c;
+
+            outputforprefix = searchString(prefix);
+
+            result.add(outputforprefix)
+        }
+
+        return result;
+    }
+
+    public List<String> searchString(String prefix) {
+
+        TrieSearch searchStartNode = root;
+
+        List<String> result = new ArrayList<String>();
+
+        for (char c : prefix.toCharArray()) {
+
+            if (searchStartNode.nodes[c - 'a'] == null) {
+                return result;
+            }
+            searchStartNode = searchStartNode.nodes[c - 'a'];
+
+        }
+
+        dfs(searchStartNode, result);
+
+        return result;
+    }
+
+    public void dfs(TrieSearch rootNode, List<String> outputforprefix) {
+
+        if (outputforprefix.size() == 3) {
+            return;
+        }
+
+        if (rootNode.word != null) {
+            outputforprefix.add(rootNode.word);
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (rootNode.nodes[i] != null) {
+                dfs(rootNode.nodes[i], outputforprefix);
+            }
+        }
+
+    }
+
+    public TrieSearch callFillTrie(String[] products) {
+
+        TrieSearch result = new TrieSearch();
+
+        for (String product : products) {
+
+            insertIntoTrie(product, result);
+        }
+
+        return result;
+    }
+
+    public void insertIntoTrie(String product, TrieSearch trieSearchNode) {
+
+        for (int i = 0; i < product.length(); i++) {
+
+            char ch = product.charAt(i);
+
+            int index = ch - 'a';
+
+            TrieSearch searchNode;
+
+            if (trieSearchNode.nodes[index] == null) {
+                searchNode = new TrieSearch();
+                trieSearchNode.nodes[index] = searchNode;
+            }
+            searchNode = trieSearchNode.nodes[index];
+
+            if (i == product.length() - 1) {
+
+                searchNode.word = product;
+            }
+
+            trieSearchNode = searchNode;
+        }
+    }
+
+    class TrieSearch {
+        String word;
+        TrieSearch nodes[] = new TrieSearch[26];
+
+    }
+}

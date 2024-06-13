@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dropdown Example</title>
+    <!-- Add Bootstrap stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="form-group">
+        <label for="dropdown1">Select Option 1:</label>
+        <select
+          id="dropdown1"
+          class="form-control"
+          onchange="updateDropdown2()"
+        >
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dropdown2">Select Option 2:</label>
+        <select id="dropdown2" class="form-control">
+          <option value="option1-1">Option 1-1</option>
+          <option value="option1-2">Option 1-2</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Add Bootstrap JavaScript dependencies -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+      function updateDropdown2() {
+        var dropdown1 = document.getElementById('dropdown1');
+        var dropdown2 = document.getElementById('dropdown2');
+
+        // Remove all existing options from dropdown2
+        dropdown2.innerHTML = '';
+
+        // Get the selected option from dropdown1
+        var selectedOption = dropdown1.value;
+
+        // Add new options to dropdown2 based on the selected option from dropdown1
+        if (selectedOption == 'option1') {
+          dropdown2.add(new Option('Option 1-1', 'option1-1'));
+          dropdown2.add(new Option('Option 1-2', 'option1-2'));
+        } else if (selectedOption == 'option2') {
+          dropdown2.add(new Option('Option 2-1', 'option2-1'));
+          dropdown2.add(new Option('Option 2-2', 'option2-2'));
+        } else if (selectedOption == 'option3') {
+          dropdown2.add(new Option('Option 3-1', 'option3-1'));
+          dropdown2.add(new Option('Option 3-2', 'option3-2'));
+        }
+      }
+    </script>
+  </body>
+</html>

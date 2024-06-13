@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React in HTML Example</title>
+  </head>
+  <body>
+    <!-- Container for the React app -->
+    <div id="root"></div>
+
+    <!-- Include React and ReactDOM scripts -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <!-- Include Babel script for JSX transpilation -->
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <!-- Your React component -->
+    <script type="text/babel">
+      // Define a simple React component
+
+      const toTextHighOrderComponent = (WrapperComponent) => {
+        return function upperCaseConverter(props) {
+          const modifiedProps = {
+            ...props,
+            text: props.text.toUpperCase(),
+          };
+
+          return <WrapperComponent {...modifiedProps} />;
+        };
+      };
+      const MyComponent = ({ text }) => {
+        return (
+          <div>
+            <h1>My Component</h1>
+            <p>this is my house address {text}</p>
+          </div>
+        );
+      };
+
+      const HighOrderCompo = toTextHighOrderComponent(MyComponent);
+
+      function App() {
+        return (
+          <div>
+            <h1>Hello, React in HTML!</h1>
+            <p>This is a simple React component in an HTML file.</p>
+
+            <HighOrderCompo text='plot no 9/b bari' />
+          </div>
+        );
+      }
+
+      // Render the React component inside the container
+      ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+  </body>
+</html>

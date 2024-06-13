@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <script>
+    function asyncTask1() {
+      return new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          console.log('task 1 done');
+          resolve('hello resolved');
+        }, 5000);
+      });
+    }
+
+    function asyncTask2() {
+      console.log('task 2');
+
+      return new Promise(function (resolve, reject) {
+        resolve('hello resolved 2');
+      });
+    }
+    function asyncTask3() {
+      console.log('task 3');
+
+      return new Promise(function (resolve, reject) {
+        resolve('hello resolved 3');
+      });
+    }
+
+    const alltask = [asyncTask1, asyncTask2, asyncTask3];
+
+    // Promise.all(alltask.map((task) => task())).then((resolved) => {
+    //   console.log('Results:', resolved);
+    // });
+
+    //
+  </script>
+
+  <body>
+    <div class="hello">ello</div>
+  </body>
+</html>
